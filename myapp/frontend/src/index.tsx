@@ -1,4 +1,4 @@
-import React from 'react';
+// import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
@@ -7,6 +7,7 @@ import zhCN from 'antd/lib/locale/zh_CN';
 import { ConfigProvider, Spin } from 'antd';
 import './store/index'
 import cookies from 'js-cookie';
+import { userLogin } from './api/kubeflowApi';
 
 import {
   BrowserRouter, HashRouter
@@ -20,10 +21,17 @@ Spin.setDefaultIndicator(<LoadingStar />)
 let isLogin = false
 const userName = cookies.get('myapp_username')
 
-if (!!userName) {
-  isLogin = true
-} else {
-  handleTips.gotoLogin()
+if (!window.location.href.includes('logout')) {
+  if (!!userName) {
+    isLogin = true
+  } else {
+    // handleTips.gotoLogin()
+    const url = `http://${window.location.host}/login/?login_url=${window.location.href}/frontend`
+    userLogin(url).finally(() => {
+      cookies.set('myapp_username', 'admin')
+      window.location.href = `${window.location.origin}/frontend`
+    })
+  }
 }
 
 changeTheme('star')

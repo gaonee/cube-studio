@@ -19,7 +19,7 @@ import {
   Text,
 } from '@fluentui/react';
 import api from '@src/api';
-import Section from '@src/components/Home/Section';
+// import Section from '@src/components/Home/Section';
 import { videoDemo } from '@src/static/home';
 import { useAppDispatch, useAppSelector } from '@src/models/hooks';
 import { getPipelineList, selectPipelineList, selectAll, getAllList } from '@src/models/pipeline';
@@ -55,7 +55,7 @@ const options: IDropdownOption[] = [
 ];
 
 const Home: React.FC = () => {
-  const dispatch = useAppDispatch();
+  const dispatch: any = useAppDispatch();
   const myPipeLine = useAppSelector(selectPipelineList);
   const myAll = useAppSelector(selectAll);
   const [videoList, setVideoList] = useState<any>([]);
@@ -127,7 +127,8 @@ const Home: React.FC = () => {
   // 跳转指定pipeline
   const goPipeline = (item: any) => {
     const url = `${window.location.origin}${location.pathname}?pipeline_id=${item?.id}`;
-    window.open(`${window.location.origin}/frontend/showOutLink?url=${encodeURIComponent(url)}`, 'bank');
+    // window.open(`${window.location.origin}/frontend/showOutLink?url=${encodeURIComponent(url)}`, 'bank');
+    window.location.href = `${window.location.origin}/frontend/showOutLink?url=${encodeURIComponent(url)}`
     // if (window.self === window.top) {
     //   window.location.href = `${window.location.origin}${location.pathname}?pipeline_id=${item?.id}`;
     // } else {
@@ -218,8 +219,8 @@ const Home: React.FC = () => {
           },
         }}
       >
-        <Section name="平台主要功能" data={pipelineList} first={true}></Section>
-        <Section name="新手视频" data={videoList}></Section>
+        {/* <Section name="平台主要功能" data={pipelineList} first={true}></Section>
+        <Section name="新手视频" data={videoList}></Section> */}
         <Stack
           styles={{
             root: {

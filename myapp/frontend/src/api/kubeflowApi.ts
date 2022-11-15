@@ -10,6 +10,16 @@ export const getAppHeaderConfig = (): Promise<AxiosResponse<IAppHeaderItem[]>> =
     return axios.get('/myapp/navbar_right')
 }
 
+export const userLogin = (login_url: string): Promise<AxiosResponse<any>> => {
+    const username = 'admin'
+    const password = 'admin'
+    return axios.post(`/login`, {
+        username, password
+    }, {
+        params: { login_url }
+    })
+}
+
 export const userLogout = (): Promise<AxiosResponse<IAppMenuItem[]>> => {
     return axios.get('/logout')
 }
